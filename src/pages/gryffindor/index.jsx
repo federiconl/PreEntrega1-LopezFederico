@@ -25,7 +25,6 @@ const Gryffindor = () => {
                     <th>species</th>
                     <th>house</th>
                     <th>patronus</th>
-
                 </thead>
                 
                 <tbody>
