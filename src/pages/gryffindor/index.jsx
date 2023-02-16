@@ -1,36 +1,62 @@
 import { useEffect, useState } from "react"
 import { usersService } from "../../services/users"
-import { useParams } from "react-router-dom"
-
+import { Link } from "react-router-dom"
 
 const Gryffindor = () => {
 
-    const [user, setUser] = useState();
+    const [characters, setUsers] = useState([])
 
-    const {userHouse} = useParams();
+    useEffect(() => {
+        usersService.getAll()
+        .then(response => setUsers(response))
 
-    useEffect(()=>{
-        usersService.getHouse(userHouse).then((data)=>setUser(data))
-    },[userHouse])
+        }
+    , [characters])
+    
+    const filterG = characters.filter((character) => character.house.includes("Gryffindor") )
 
-    return(
-        <ul >
-            <img src="{`${user && user.image}`}" alt="" />
-            <h1> {user && user.name} </h1>
-            <li>Especie: {user && user.species}</li>
-            <li>Genero: {user && user.gender}</li>
-            <li>Casa: {user && user.house}</li>
-            <li>Fecha de nacimiento: {user && user.dateOfBirth}</li>
-            <li>Ancestros: {user && user.ancestry}</li>
-            <li>Color de ojos: {user && user.eyeColour}</li>
-            <li>color de pelo: {user && user.hairColour}</li>
-            <li>Patronus: {user && user.patronus}</li>
-            <li>Actor que lo interpreta: {user && user.actor}</li>
- 
-            
-        </ul>
+    return (
+        <>
+            <h1>Personajes</h1>
+            <table border={3}>
+                <thead>
+                    <th>image</th>
+                    <th>name</th>
+                    <th>species</th>
+                    <th>house</th>
+                    <th>patronus</th>
+
+                </thead>
+                
+                <tbody>
+                    {
+                        filterG.map(user=>{
+                            return(
+                                <tr key={user.id}>
+                                    <td>
+                                       <img height={150} width={100} src={`${user.image}`} alt=""/>
+                                    </td>
+                                    <td>
+                                        <Link to={`/users/${user.id}`}>{user.name}</Link>
+                                    </td>
+                                    <td>{user.species}</td>
+                                    <td>
+                                        {user.house}
+                                    </td>
+                                    <td>{user.patronus}</td>
+                                </tr>
+                            )
+                        }
+                            )
+                    }
+                </tbody>
+            </table>
+        </>
     )
- 
-} 
+}
+    
 
-export {Gryffindor}
+
+  
+  
+  export {Gryffindor}

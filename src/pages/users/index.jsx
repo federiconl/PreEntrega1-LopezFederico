@@ -37,7 +37,7 @@ const Users = () => {
                                     </td>
                                     <td>{user.species}</td>
                                     <td>
-                                        <Link to={`category/${user.house}`}>{user.house}</Link>
+                                        {user.house}
                                     </td>
                                     <td>{user.patronus}</td>
                                 </tr>

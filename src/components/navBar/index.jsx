@@ -17,6 +17,11 @@ const NavBar = () => {
           </li>
           <a className="nav-link" href=""><CartWidget/>3</a> 
         </ul>
+        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/gryffindor">Gryffindor</NavLink>
+          </li>
+        </ul>
         
         
         <form className="d-flex" role="search">
